@@ -1,0 +1,5 @@
+build/
+*.exe
+# Exécutables prêts à l'emploi : versionnés volontairement pour être téléchargeables
+!dist/*.exe
+!dist/*.jar
