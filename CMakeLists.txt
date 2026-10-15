@@ -16,6 +16,15 @@ target_include_directories(calc_core PUBLIC src)
 add_executable(calc src/main.cpp)
 target_link_libraries(calc PRIVATE calc_core)
 
+# Interface graphique native (Windows uniquement) : calc-gui.exe
+if(WIN32)
+  add_executable(calc-gui WIN32 src/gui_win32.cpp)
+  target_link_libraries(calc-gui PRIVATE calc_core dwmapi uxtheme)
+  if(MINGW)
+    target_link_options(calc-gui PRIVATE -municode)
+  endif()
+endif()
+
 enable_testing()
 add_executable(test_calc tests/test_calc.cpp)
 target_link_libraries(test_calc PRIVATE calc_core)

@@ -79,7 +79,9 @@ int main(int argc, char** argv) {
         int status = 0;
         for (int i = 1; i < argc; ++i) {
             try {
-                std::cout << calc::formatNumber(in.execute(argv[i]).value) << "\n";
+                const calc::Result r = in.execute(argv[i]);
+                if (r.kind == calc::Result::Kind::Defined) std::cout << "Fonction " << r.name << " définie.\n";
+                else std::cout << calc::formatNumber(r.value) << "\n";
             } catch (const calc::CalcError& e) {
                 printError(argv[i], e, true);
                 status = 1;

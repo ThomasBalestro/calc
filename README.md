@@ -2,6 +2,7 @@
 
 Interpréteur d'expressions mathématiques **en C++17**, sans dépendance : variables, fonctions définies
 par l'utilisateur, et des messages d'erreur qui **pointent l'endroit exact** du problème.
+Deux interfaces sur le même moteur : une **fenêtre Windows native** (API Win32) et la console.
 
 ```
 > rayon = 3
@@ -20,7 +21,17 @@ Erreur : Valeur attendue, trouvé « * »
 
 ## Démarrage
 
-**Sans compiler (Windows)** : `dist\calc.exe`
+**Sans compiler (Windows)** : `dist\calc-gui.exe` (fenêtre) ou `dist\calc.exe` (console)
+
+### Interface graphique
+
+Écrite directement avec l'API Win32 (aucune bibliothèque) dans `src/gui_win32.cpp` :
+historique des calculs, pavé numérique et scientifique, panneau des variables et fonctions,
+thème sombre avec barre de titre sombre sous Windows 10/11, prise en compte de la mise à l'échelle (DPI).
+
+- **Entrée** calcule, **Échap** efface, **↑ / ↓** rappellent les expressions précédentes.
+- En cas d'erreur, le caractère fautif est **sélectionné** dans la saisie et le message s'affiche dessous.
+- Double-clic sur l'historique pour reprendre une expression, sur une variable ou fonction pour l'insérer.
 
 **Compiler** : `build.bat` sous Windows, ou :
 
@@ -30,7 +41,7 @@ ctest --test-dir build      # 43 tests
 ./build/calc
 ```
 
-Trois façons de l'utiliser :
+Trois façons d'utiliser la console :
 
 ```bash
 calc                          # mode interactif (:aide pour la liste des commandes)
